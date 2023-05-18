@@ -37,7 +37,6 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext }) {
 
 	return (
 		<>
-			<div>Player 1</div>
 			<div className="status">{status}</div>
 			<div className="board-row">
 				<Square value={squares[0]} onSquareClick={() => handleClick(0)} />
@@ -74,14 +73,24 @@ function PlayerPicker() {
 export default function App() {
 	const [player1IsNext, setPlayer1IsNext] = useState(true);
 
-	let player1 = 'x';
-	let player2 = 'o';
-	let gameHasBegun = false;
+	let player1 = '🦊';
+	let player2 = '🐰';
 
   	return (
   		<>
-			<PlayerPicker />
-			<Board player1={player1} player2={player2} player1IsNext={player1IsNext} setPlayer1IsNext={setPlayer1IsNext} />
+			<div className="main-container">
+				<div className="player-container">
+					<h1>Player 1</h1>
+					<PlayerPicker />
+				</div>
+				<div className="board-container">
+					<Board player1={player1} player2={player2} player1IsNext={player1IsNext} setPlayer1IsNext={setPlayer1IsNext} />
+				</div>
+				<div className="player-container">
+					<h1>Player 2</h1>
+					<PlayerPicker />
+				</div>
+			</div>
 		</>
 	);
 }
