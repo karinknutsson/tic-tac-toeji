@@ -57,7 +57,7 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext }) {
 	);
 }
 
-function PlayerPicker({ hidePicker, setEmojiPlayer1 }) {
+function PlayerPicker({ hidePicker, setEmoji, player }) {
 
 	if (hidePicker) {
 		return null;
@@ -69,31 +69,34 @@ function PlayerPicker({ hidePicker, setEmojiPlayer1 }) {
 
 	return (
 		<>
-			<div><EmojiPicker onEmojiClick={(e) => setEmojiPlayer1(e.emoji)} lazyLoadEmojis="true" theme="dark" /></div>
+			<div><EmojiPicker onEmojiClick={(e) => setEmoji(player, e.emoji)} lazyLoadEmojis="true" theme="dark" /></div>
 		</>
 	);
 }
 
 export default function App() {
+	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊'});
+	const [player2, setPlayer2] = useState({id: 2, emoji: '🐰'});
 	const [player1IsNext, setPlayer1IsNext] = useState(true);
 	const [hidePicker1, setHidePicker1] = useState(true);
-
-	let hidePicker2 = true;
+	const [hidePicker2, setHidePicker2] = useState(true);
 
 	function showPicker(player) {
-		if (player === player1) {
+		if (player.id === player1.id) {
 			setHidePicker1(!hidePicker1);
 		} else {
-			hidePicker2 = false;
+			setHidePicker2(!hidePicker2);
 		}
 	}
 
-	const [player1, setPlayer1] = useState('🦊');
-	const [player2, setPlayer2] = useState('🐰');
-
-	const setEmojiPlayer1 = (emoji) => {
-		setPlayer1(emoji);
-		setHidePicker1(!hidePicker1);
+	const setEmoji = (player, emoji) => {
+		if (player.id === 1) {
+			setPlayer1({id: 1, emoji: emoji});
+			setHidePicker1(!hidePicker1);
+		} else {
+			setPlayer2({id: 2, emoji: emoji});
+			setHidePicker2(!hidePicker2);
+		}
 	}
 
   	return (
@@ -108,21 +111,35 @@ export default function App() {
 								data-tooltip-content="Click to set emoji"
 								onClick={() => showPicker(player1)}
 							>
-								{player1}
+								{player1.emoji}
 							</button>
 						</h1>
 						<Tooltip id="set-emoji-player1" />
 						<h2><a data-tooltip-id="set-name-player1" data-tooltip-content="Click to edit name">Player 1</a></h2>
 						<Tooltip id="set-name-player1" />
  				    </div>
-					<PlayerPicker hidePicker={hidePicker1} setEmojiPlayer1={setEmojiPlayer1}/>
+					<PlayerPicker hidePicker={hidePicker1} setEmoji={setEmoji} player={player1}/>
 				</div>
 				<div className="board-container">
 					<Board player1={player1} player2={player2} player1IsNext={player1IsNext} setPlayer1IsNext={setPlayer1IsNext} />
 				</div>
 				<div className="player-container">
-					<h1>{player2} Player 2</h1>
-					<PlayerPicker hidePicker={hidePicker2} />
+					<div className="player-title-container">
+						<h1>
+							<button
+								className="btn-emoji"
+								data-tooltip-id="set-emoji-player1"
+								data-tooltip-content="Click to set emoji"
+								onClick={() => showPicker(player2)}
+							>
+								{player2.emoji}
+							</button>
+						</h1>
+						<Tooltip id="set-emoji-player2" />
+						<h2><a data-tooltip-id="set-name-player2" data-tooltip-content="Click to edit name">Player 2</a></h2>
+						<Tooltip id="set-name-player2" />
+ 				    </div>
+					<PlayerPicker hidePicker={hidePicker2} setEmoji={setEmoji} player={player2}/>
 				</div>
 			</div>
 		</>
