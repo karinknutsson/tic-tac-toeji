@@ -57,43 +57,65 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext }) {
 	);
 }
 
-function PlayerPicker({ hidePicker }) {
+function PlayerPicker({ hidePicker, setEmojiPlayer1 }) {
 
 	if (hidePicker) {
 		return null;
 	}
 
 	function handleOnEmoji(e) {
-		console.log(e);
+		setEmoji(e.emoji);
 	}
 
 	return (
 		<>
-			<div><EmojiPicker onEmojiClick={handleOnEmoji} theme='dark' /></div>
+			<div><EmojiPicker onEmojiClick={(e) => setEmojiPlayer1(e.emoji)} lazyLoadEmojis="true" theme="dark" /></div>
 		</>
 	);
 }
 
 export default function App() {
 	const [player1IsNext, setPlayer1IsNext] = useState(true);
+	const [hidePicker1, setHidePicker1] = useState(true);
 
-	let player1 = '🦊';
-	let player2 = '🐰';
-
-	let hidePicker1 = true;
 	let hidePicker2 = true;
+
+	function showPicker(player) {
+		if (player === player1) {
+			setHidePicker1(!hidePicker1);
+		} else {
+			hidePicker2 = false;
+		}
+	}
+
+	const [player1, setPlayer1] = useState('🦊');
+	const [player2, setPlayer2] = useState('🐰');
+
+	const setEmojiPlayer1 = (emoji) => {
+		setPlayer1(emoji);
+		setHidePicker1(!hidePicker1);
+	}
 
   	return (
   		<>
 			<div className="main-container">
 				<div className="player-container">
 					<div className="player-title-container">
-						<h1><button className="btn-emoji" data-tooltip-id="set-emoji-player1" data-tooltip-content="Click to set emoji">{player1}</button></h1>
+						<h1>
+							<button
+								className="btn-emoji"
+								data-tooltip-id="set-emoji-player1"
+								data-tooltip-content="Click to set emoji"
+								onClick={() => showPicker(player1)}
+							>
+								{player1}
+							</button>
+						</h1>
 						<Tooltip id="set-emoji-player1" />
 						<h2><a data-tooltip-id="set-name-player1" data-tooltip-content="Click to edit name">Player 1</a></h2>
 						<Tooltip id="set-name-player1" />
  				    </div>
-					<PlayerPicker hidePicker={hidePicker1} />
+					<PlayerPicker hidePicker={hidePicker1} setEmojiPlayer1={setEmojiPlayer1}/>
 				</div>
 				<div className="board-container">
 					<Board player1={player1} player2={player2} player1IsNext={player1IsNext} setPlayer1IsNext={setPlayer1IsNext} />
