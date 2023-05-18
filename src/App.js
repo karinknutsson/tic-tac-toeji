@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import EmojiPicker from 'emoji-picker-react';
-//import { Theme } from 'emoji-picker-react';
+import { Tooltip } from 'react-tooltip'
 
 function Square({ value, onSquareClick }) {
 	return (
@@ -57,7 +57,11 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext }) {
 	);
 }
 
-function PlayerPicker() {
+function PlayerPicker({ hidePicker }) {
+
+	if (hidePicker) {
+		return null;
+	}
 
 	function handleOnEmoji(e) {
 		console.log(e);
@@ -76,19 +80,27 @@ export default function App() {
 	let player1 = '🦊';
 	let player2 = '🐰';
 
+	let hidePicker1 = true;
+	let hidePicker2 = true;
+
   	return (
   		<>
 			<div className="main-container">
 				<div className="player-container">
-					<h1>Player 1</h1>
-					<PlayerPicker />
+					<div className="player-title-container">
+						<h1><button className="btn-emoji" data-tooltip-id="set-emoji-player1" data-tooltip-content="Click to set emoji">{player1}</button></h1>
+						<Tooltip id="set-emoji-player1" />
+						<h2><a data-tooltip-id="set-name-player1" data-tooltip-content="Click to edit name">Player 1</a></h2>
+						<Tooltip id="set-name-player1" />
+ 				    </div>
+					<PlayerPicker hidePicker={hidePicker1} />
 				</div>
 				<div className="board-container">
 					<Board player1={player1} player2={player2} player1IsNext={player1IsNext} setPlayer1IsNext={setPlayer1IsNext} />
 				</div>
 				<div className="player-container">
-					<h1>Player 2</h1>
-					<PlayerPicker />
+					<h1>{player2} Player 2</h1>
+					<PlayerPicker hidePicker={hidePicker2} />
 				</div>
 			</div>
 		</>

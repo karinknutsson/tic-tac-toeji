@@ -15,35 +15,21 @@ body {
   color: white;
 }
 
+h1, h2, h3 {
+	margin: 0;
+}
+
 h1 {
-  margin-top: 0;
-  font-size: 42px;
-  letter-spacing: 4px;
+  	font-size: 64px;
 }
 
 h2 {
-  margin-top: 0;
-  font-size: 20px;
+	font-size: 42px;
+	letter-spacing: 2px;
 }
 
 h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-h4 {
-  margin-top: 0;
-  font-size: 16px;
-}
-
-h5 {
-  margin-top: 0;
-  font-size: 14px;
-}
-
-h6 {
-  margin-top: 0;
-  font-size: 12px;
+  	font-size: 32px;
 }
 
 code {
@@ -64,6 +50,19 @@ body {
   padding: 0;
 }
 
+.btn-emoji {
+	width: 120px;
+	height: 120px;
+	font-size: 64pt;
+	background: transparent;
+	border: 0;
+	border-radius: 60px;
+}
+
+.btn-emoji:hover {
+	background: rgb(244, 201, 22);
+}
+
 .main-container {
 	padding: 80px;
 	width: 100%;
@@ -71,6 +70,13 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.player-title-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 24px;
 }
 
 .square {
