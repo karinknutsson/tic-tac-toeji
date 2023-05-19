@@ -33,6 +33,14 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext, setModalCont
 
 	const winner = calculateWinner(squares);
 
+	if (winner) {
+		return (
+			<>
+				<div className="winner-container">{winner}</div>
+			</>
+		);
+	}
+
 	if (isGameOver() && !winner) {
 		setSquares(Array(9).fill(null));
 		return;

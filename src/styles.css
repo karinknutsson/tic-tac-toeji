@@ -85,7 +85,6 @@ body {
 	width: 100vw;
 	height: 100vh;
 	background: rgba(0, 0, 0, 0.5);
-	/* visibility: hidden; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -97,9 +96,9 @@ body {
 	padding: 24px 64px;
 	background: black;
 	border-radius: 4px;
-	/* display: flex;
+	display: flex;
 	flex-direction: column;
-	justify-content: space-between; */
+	justify-content: space-between;
 }
 
 .main {
@@ -171,7 +170,14 @@ body {
 }
 
 .board-row:after {
-  clear: both;
-  content: '';
-  display: table;
+	clear: both;
+	content: '';
+	display: table;
+}
+
+.winner-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 104pt;
 }
