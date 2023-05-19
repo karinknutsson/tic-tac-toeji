@@ -27,7 +27,15 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext }) {
 		setPlayer1IsNext(!player1IsNext);
 	}
 
+	function isGameOver() {
+		return !squares.some((element) => element === null);
+	}
+
 	const winner = calculateWinner(squares);
+
+	if (isGameOver() && !winner) {
+		return <Modal content={"No winner"} setModalContent={() => ""} />;
+	}
 
 	return (
 		<>
@@ -148,7 +156,13 @@ export default function App() {
 						<PlayerPicker hidePicker={hidePicker1} setEmoji={setEmoji} player={player1}/>
 					</div>
 					<div className="board-container">
-						<Board player1={player1} player2={player2} player1IsNext={player1IsNext} setPlayer1IsNext={setPlayer1IsNext} />
+						<Board
+							player1={player1}
+							player2={player2}
+							player1IsNext={player1IsNext}
+							setPlayer1IsNext={setPlayer1IsNext}
+							//setModalContent={setModalContent}
+						/>
 					</div>
 					<div className={"player-container " + (!player1IsNext ? "active" : "")}>
 						<div className="player-title-container">
