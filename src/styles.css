@@ -3,8 +3,8 @@
   src: local('LilitaOne'), url(./fonts/LilitaOne.ttf) format('truetype');
 }
 
-* {
-  box-sizing: border-box;
+html, body {
+	overflow: hidden;
 }
 
 body {
@@ -50,6 +50,10 @@ body {
   padding: 0;
 }
 
+.modal, .main {
+	position: absolute;
+}
+
 .btn-emoji {
 	width: 120px;
 	height: 120px;
@@ -63,8 +67,34 @@ body {
 	background: rgb(244, 201, 22);
 }
 
+.modal {
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	/* visibility: hidden; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-content {
+	width: 30vw;
+	height: 20vh;
+	padding: 64px;
+	background: black;
+	border-radius: 4px;
+}
+
 .main {
-	padding: 80px;
+	z-index: 5;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	padding: 64px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -72,12 +102,11 @@ body {
 }
 
 .main-container {
-	padding: 80px;
 	width: 100%;
-	height: 100%;
+	padding: 64px;
 	display: flex;
 	flex-direction: row;
-	gap: 120px;
+	gap: 64px;
 }
 
 .player-container {
@@ -85,15 +114,15 @@ body {
 }
 
 .board-container {
-	flex: 2 1 30%;
+	flex: 2 1 27%;
 	padding: 0 40px;
 }
 
 .player-title-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
-	gap: 24px;
+	gap: 16px;
 }
 
 .active {

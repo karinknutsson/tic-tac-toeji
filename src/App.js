@@ -64,7 +64,7 @@ function PlayerPicker({ hidePicker, setEmoji, player }) {
 
 	return (
 		<>
-			<div><EmojiPicker onEmojiClick={(e) => setEmoji(player, e.emoji)} lazyLoadEmojis="true" theme="dark" /></div>
+			<div><EmojiPicker onEmojiClick={(e) => setEmoji(player, e.emoji)} lazyLoadEmojis="false" theme="dark" /></div>
 		</>
 	);
 }
@@ -76,6 +76,7 @@ export default function App() {
 	const [hidePicker1, setHidePicker1] = useState(true);
 	const [hidePicker2, setHidePicker2] = useState(true);
 	const [showModal, setShowModal] = useState(false);
+	const [modalContent, setModalContent] = useState('something');
 
 	function showPicker(player) {
 		if (player.id === player1.id) {
@@ -105,6 +106,11 @@ export default function App() {
 
   	return (
   		<>
+			<div className="modal">
+				<div className="modal-content">
+					{modalContent}
+				</div>
+			</div>
 			<div className="main">
 				<h1>T I C - T A C - T O E J I</h1>
 				<div className="main-container">
