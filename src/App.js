@@ -69,6 +69,22 @@ function PlayerPicker({ hidePicker, setEmoji, player }) {
 	);
 }
 
+function Modal({ content, setModalContent }) {
+	if (!content) {
+		return;
+	}
+
+	return (
+		<>
+			<div className="modal" onClick={() => setModalContent("")}>
+				<div className="modal-content">
+					{content}
+				</div>
+			</div>
+		</>
+	);
+}
+
 export default function App() {
 	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊'});
 	const [player2, setPlayer2] = useState({id: 2, emoji: '🐰'});
@@ -76,7 +92,7 @@ export default function App() {
 	const [hidePicker1, setHidePicker1] = useState(true);
 	const [hidePicker2, setHidePicker2] = useState(true);
 	const [showModal, setShowModal] = useState(false);
-	const [modalContent, setModalContent] = useState('something');
+	const [modalContent, setModalContent] = useState("Some content");
 
 	function showPicker(player) {
 		if (player.id === player1.id) {
@@ -106,11 +122,7 @@ export default function App() {
 
   	return (
   		<>
-			<div className="modal">
-				<div className="modal-content">
-					{modalContent}
-				</div>
-			</div>
+			<Modal content={modalContent} setModalContent={setModalContent}/>
 			<div className="main">
 				<h1>T I C - T A C - T O E J I</h1>
 				<div className="main-container">
