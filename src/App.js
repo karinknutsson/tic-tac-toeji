@@ -78,7 +78,10 @@ function Modal({ content, setModalContent }) {
 		<>
 			<div className="modal" onClick={() => setModalContent("")}>
 				<div className="modal-content">
-					{content}
+					<p>
+						{content}
+					</p>
+					<button className="btn-modal" onClick={() => setModalContent("")}>OK</button>
 				</div>
 			</div>
 		</>
@@ -107,14 +110,14 @@ export default function App() {
 			if (emoji !== player2.emoji) {
 				setPlayer1({id: 1, emoji: emoji});
 			} else {
-				setShowModal(true);
+				setModalContent("Please pick an emoji that is not already in use");
 			}
 			setHidePicker1(!hidePicker1);
 		} else {
 			if (emoji !== player1.emoji) {
 				setPlayer2({id: 2, emoji: emoji});
 			} else {
-				setShowModal(true);
+				setModalContent("Please pick an emoji that is not already in use");
 			}
 			setHidePicker2(!hidePicker2);
 		}
