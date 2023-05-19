@@ -10,7 +10,7 @@ function Square({ value, onSquareClick }) {
 	);
 }
 
-function Board({ player1, player2, player1IsNext, setPlayer1IsNext }) {
+function Board({ player1, player2, player1IsNext, setPlayer1IsNext, setModalContent }) {
 	const [squares, setSquares] = useState(Array(9).fill(null));
 
 	function handleClick(i) {
@@ -34,7 +34,8 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext }) {
 	const winner = calculateWinner(squares);
 
 	if (isGameOver() && !winner) {
-		return <Modal content={"No winner"} setModalContent={() => ""} />;
+		setSquares(Array(9).fill(null));
+		return;
 	}
 
 	return (
@@ -103,7 +104,7 @@ export default function App() {
 	const [hidePicker1, setHidePicker1] = useState(true);
 	const [hidePicker2, setHidePicker2] = useState(true);
 	const [showModal, setShowModal] = useState(false);
-	const [modalContent, setModalContent] = useState("Some content");
+	const [modalContent, setModalContent] = useState("");
 
 	function showPicker(player) {
 		if (player.id === player1.id) {
