@@ -31,7 +31,7 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext, setModalCont
 		return !squares.some((element) => element === null);
 	}
 
-	const winner = calculateWinner(squares);
+	const winner = calculateWinner(squares, player1, player2);
 
 	if (winner) {
 		return (
@@ -106,10 +106,8 @@ function Modal({ content, setModalContent }) {
 }
 
 export default function App() {
-	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊', name: "Player 1"});
-	const [player2, setPlayer2] = useState({id: 2, emoji: '🐰', name: "Player 2"});
-	const [player1emojis, setPlayer1emojis] = useState(['🦊']);
-	const [player2emojis, setPlayer2emojis] = useState(['🐰']);
+	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊', name: "Player 1", emojis: ['🦊']});
+	const [player2, setPlayer2] = useState({id: 2, emoji: '🐰', name: "Player 2", emojis: ['🐰']});
 	const [player1IsNext, setPlayer1IsNext] = useState(true);
 	const [hidePicker1, setHidePicker1] = useState(true);
 	const [hidePicker2, setHidePicker2] = useState(true);
@@ -126,18 +124,15 @@ export default function App() {
 
 	const setEmoji = (player, emoji) => {
 		if (player.id === 1) {
-			if (player2emojis.findIndex((element) => element === emoji) === -1) {
-				setPlayer1({id: 1, emoji: emoji, name: player.name});
-				setPlayer1emojis([...player1emojis, emoji]);
+			if (player2.emojis.findIndex((element) => element === emoji) === -1) {
+				setPlayer1({id: 1, emoji: emoji, name: player.name, emojis: [...player.emojis, emoji]});
 			} else {
 				setModalContent("Pick an emoji that is not already in use");
 			}
 			setHidePicker1(!hidePicker1);
 		} else {
-			console.log(typeof player1emojis);
-			if (player1emojis.findIndex((element) => element === emoji) === -1) {
-				setPlayer2({id: 2, emoji: emoji, name: player.name});
-				setPlayer2emojis([...player2emojis, emoji]);
+			if (player1.emojis.findIndex((element) => element === emoji) === -1) {
+				setPlayer2({id: 2, emoji: emoji, name: player.name, emojis: [...player.emojis, emoji]});
 			} else {
 				setModalContent("Pick an emoji that is not already in use");
 			}
@@ -168,7 +163,7 @@ export default function App() {
 								type="text"
 								value={player1.name}
 								onChange={(event) => {
-									setPlayer1({id: 1, emoji: player1.emoji, name: event.target.value});
+									setPlayer1({id: 1, emoji: player1.emoji, name: event.target.value, emojis: player1.emojis});
 								}}
 								className="player-name"
 								data-tooltip-id="set-name-player1"
@@ -203,7 +198,7 @@ export default function App() {
 								type="text"
 								value={player2.name}
 								onChange={(event) => {
-									setPlayer2({id: 2, emoji: player2.emoji, name: event.target.value});
+									setPlayer2({id: 2, emoji: player2.emoji, name: event.target.value, emojis: player2.emojis});
 								}}
 								className="player-name"
 								data-tooltip-id="set-name-player2"
@@ -219,7 +214,7 @@ export default function App() {
 	);
 }
 
-function calculateWinner(squares) {
+function calculateWinner(squares, player1emojis, player2emojis) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
