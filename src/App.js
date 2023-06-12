@@ -81,7 +81,7 @@ function PlayerPicker({ hidePicker, setEmoji, player }) {
 
 	return (
 		<>
-			<div><EmojiPicker onEmojiClick={(e) => setEmoji(player, e.emoji)} lazyLoadEmojis="false" theme="dark" /></div>
+			<div><EmojiPicker onEmojiClick={(e) => setEmoji(player, e.emoji)} theme="dark" preload /></div>
 		</>
 	);
 }
@@ -106,8 +106,8 @@ function Modal({ content, setModalContent }) {
 }
 
 export default function App() {
-	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊'});
-	const [player2, setPlayer2] = useState({id: 2, emoji: '🐰'});
+	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊', name: "Player 13"});
+	const [player2, setPlayer2] = useState({id: 2, emoji: '🐰', name: "Player 2"});
 	const [player1IsNext, setPlayer1IsNext] = useState(true);
 	const [hidePicker1, setHidePicker1] = useState(true);
 	const [hidePicker2, setHidePicker2] = useState(true);
@@ -125,14 +125,14 @@ export default function App() {
 	const setEmoji = (player, emoji) => {
 		if (player.id === 1) {
 			if (emoji !== player2.emoji) {
-				setPlayer1({id: 1, emoji: emoji});
+				setPlayer1({id: 1, emoji: emoji, name: player.name});
 			} else {
 				setModalContent("Please pick an emoji that is not already in use");
 			}
 			setHidePicker1(!hidePicker1);
 		} else {
 			if (emoji !== player1.emoji) {
-				setPlayer2({id: 2, emoji: emoji});
+				setPlayer2({id: 2, emoji: emoji, name: player.name});
 			} else {
 				setModalContent("Please pick an emoji that is not already in use");
 			}
@@ -159,7 +159,16 @@ export default function App() {
 								</button>
 							</h1>
 							<Tooltip id="set-emoji-player1" />
-							<h2><a data-tooltip-id="set-name-player1" data-tooltip-content="Click to edit name">Player 1</a></h2>
+							<input
+								type="text"
+								value={player1.name}
+								onChange={(event) => {
+									setPlayer1({id: 1, emoji: player1.emoji, name: event.target.value});
+								}}
+								class="player-name"
+								data-tooltip-id="set-name-player1"
+								data-tooltip-content="Click to edit name"
+							/>
 							<Tooltip id="set-name-player1" />
 	 				    </div>
 						<PlayerPicker hidePicker={hidePicker1} setEmoji={setEmoji} player={player1}/>
@@ -170,7 +179,6 @@ export default function App() {
 							player2={player2}
 							player1IsNext={player1IsNext}
 							setPlayer1IsNext={setPlayer1IsNext}
-							//setModalContent={setModalContent}
 						/>
 					</div>
 					<div className={"player-container " + (!player1IsNext ? "active" : "")}>

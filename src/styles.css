@@ -138,6 +138,15 @@ body {
 	gap: 16px;
 }
 
+.player-name {
+	border: 0;
+	background: transparent;
+	color: white;
+	font-size: 42pt;
+	font-family: inherit;
+	font-weight: bold;
+}
+
 .active {
 	background: red;
 }
