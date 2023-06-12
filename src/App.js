@@ -194,7 +194,16 @@ export default function App() {
 								</button>
 							</h1>
 							<Tooltip id="set-emoji-player2" />
-							<h2><a data-tooltip-id="set-name-player2" data-tooltip-content="Click to edit name">Player 2</a></h2>
+							<input
+								type="text"
+								value={player2.name}
+								onChange={(event) => {
+									setPlayer2({id: 2, emoji: player2.emoji, name: event.target.value});
+								}}
+								class="player-name"
+								data-tooltip-id="set-name-player2"
+								data-tooltip-content="Click to edit name"
+							/>
 							<Tooltip id="set-name-player2" />
 	 				    </div>
 						<PlayerPicker hidePicker={hidePicker2} setEmoji={setEmoji} player={player2}/>

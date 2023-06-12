@@ -142,9 +142,15 @@ body {
 	border: 0;
 	background: transparent;
 	color: white;
-	font-size: 42pt;
+	font-size: 24pt;
 	font-family: inherit;
 	font-weight: bold;
+	width: 20vw;
+}
+
+.player-name:focus {
+	outline: none;
+	background: blue;
 }
 
 .active {
