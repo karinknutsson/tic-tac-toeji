@@ -175,11 +175,8 @@ body {
 	background: #222;
 	border: 3px solid black;
 	border-radius: 4px;
-	float: left;
 	font-size: 56pt;
 	line-height: 34px;
-	margin-right: -1px;
-	margin-top: -1px;
 	padding: 0;
 	text-align: center;
 }
@@ -197,18 +194,33 @@ body {
 }
 
 .winner {
-	font-size: 104pt;
-	animation: rotation 1s infinite;
+	margin-top: 21px;
+	animation: winning 1s infinite;
+	animation-timing-function: linear;
 }
 
-@keyframes rotation {
+@keyframes winning {
 	0% {
   		rotate: 0deg;
 	}
-	50% {
+	/* 50% {
 		rotate: 180deg;
-	}
+	} */
 	100% {
 		rotate: 360deg;
+	}
+}
+
+.loser {
+	margin-top: 21px;
+	animation: losing 1s 1;
+}
+
+@keyframes losing {
+	0% {
+		font-size: 56pt;
+	}
+	100% {
+		font-size: 0;
 	}
 }

@@ -36,7 +36,61 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext, setModalCont
 	if (winner) {
 		return (
 			<>
-				<div className="winner-container">{winner.emojis.map(emoji => (<div className="winner">{emoji}</div>))}</div>
+				{/*
+				<div className="winner-container">{winner.emojis.map(emoji => (<div className="winner">{emoji}</div>))}</div>*/}
+				<div className="board">
+					<div className="board-row">
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[0]) ? "winner" : "loser")}>
+								{squares[0]}
+							</div>
+						</div>
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[1]) ? "winner" : "loser")}>
+								{squares[1]}
+							</div>
+						</div>
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[2]) ? "winner" : "loser")}>
+								{squares[2]}
+							</div>
+						</div>
+					</div>
+					<div className="board-row">
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[3]) ? "winner" : "loser")}>
+								{squares[3]}
+							</div>
+						</div>
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[4]) ? "winner" : "loser")}>
+								{squares[4]}
+							</div>
+						</div>
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[5]) ? "winner" : "loser")}>
+								{squares[5]}
+							</div>
+						</div>
+					</div>
+					<div className="board-row">
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[6]) ? "winner" : "loser")}>
+								{squares[6]}
+							</div>
+						</div>
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[7]) ? "winner" : "loser")}>
+								{squares[7]}
+							</div>
+						</div>
+						<div className="square">
+							<div className={(winner.emojis.some(element => element === squares[8]) ? "winner" : "loser")}>
+								{squares[8]}
+							</div>
+						</div>
+					</div>
+				</div>
 			</>
 		);
 	}
