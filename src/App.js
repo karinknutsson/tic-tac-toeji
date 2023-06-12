@@ -14,7 +14,7 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext, setModalCont
 	const [squares, setSquares] = useState(Array(9).fill(null));
 
 	function handleClick(i) {
-		if (squares[i] || calculateWinner(squares)) {
+		if (squares[i] || calculateWinner(squares, player1, player2)) {
 			return;
 		}
 		const nextSquares = squares.slice();
@@ -36,7 +36,7 @@ function Board({ player1, player2, player1IsNext, setPlayer1IsNext, setModalCont
 	if (winner) {
 		return (
 			<>
-				<div className="winner-container">{winner}</div>
+				<div className="winner-container">{winner.emojis.map(emoji => (<div className="winner">{emoji}</div>))}</div>
 			</>
 		);
 	}
@@ -214,22 +214,33 @@ export default function App() {
 	);
 }
 
-function calculateWinner(squares, player1emojis, player2emojis) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
+function calculateWinner(squares, player1, player2) {
+	const lines = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[0, 4, 8],
+		[2, 4, 6]
+	];
+	for (let i = 0; i < lines.length; i++) {
+		const [a, b, c] = lines[i];
+
+		if (player1.emojis.some(element => element === squares[a]) &&
+			player1.emojis.some(element => element === squares[b]) &&
+			player1.emojis.some(element => element === squares[c])
+			) {
+		  return player1;
+		}
+
+		if (player2.emojis.some(element => element === squares[a]) &&
+			player2.emojis.some(element => element === squares[b]) &&
+			player2.emojis.some(element => element === squares[c])
+			) {
+		  return player2;
+		}
+	}
   return null;
 }

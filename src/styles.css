@@ -194,5 +194,21 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.winner {
 	font-size: 104pt;
+	animation: rotation 1s infinite;
+}
+
+@keyframes rotation {
+	0% {
+  		rotate: 0deg;
+	}
+	50% {
+		rotate: 180deg;
+	}
+	100% {
+		rotate: 360deg;
+	}
 }
