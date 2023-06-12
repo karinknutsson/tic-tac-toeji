@@ -106,8 +106,10 @@ function Modal({ content, setModalContent }) {
 }
 
 export default function App() {
-	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊', name: "Player 13"});
+	const [player1, setPlayer1] = useState({id: 1, emoji: '🦊', name: "Player 1"});
 	const [player2, setPlayer2] = useState({id: 2, emoji: '🐰', name: "Player 2"});
+	const [player1emojis, setPlayer1emojis] = useState(['🦊']);
+	const [player2emojis, setPlayer2emojis] = useState(['🐰']);
 	const [player1IsNext, setPlayer1IsNext] = useState(true);
 	const [hidePicker1, setHidePicker1] = useState(true);
 	const [hidePicker2, setHidePicker2] = useState(true);
@@ -124,17 +126,20 @@ export default function App() {
 
 	const setEmoji = (player, emoji) => {
 		if (player.id === 1) {
-			if (emoji !== player2.emoji) {
+			if (player2emojis.findIndex((element) => element === emoji) === -1) {
 				setPlayer1({id: 1, emoji: emoji, name: player.name});
+				setPlayer1emojis([...player1emojis, emoji]);
 			} else {
-				setModalContent("Please pick an emoji that is not already in use");
+				setModalContent("Pick an emoji that is not already in use");
 			}
 			setHidePicker1(!hidePicker1);
 		} else {
-			if (emoji !== player1.emoji) {
+			console.log(typeof player1emojis);
+			if (player1emojis.findIndex((element) => element === emoji) === -1) {
 				setPlayer2({id: 2, emoji: emoji, name: player.name});
+				setPlayer2emojis([...player2emojis, emoji]);
 			} else {
-				setModalContent("Please pick an emoji that is not already in use");
+				setModalContent("Pick an emoji that is not already in use");
 			}
 			setHidePicker2(!hidePicker2);
 		}
@@ -165,7 +170,7 @@ export default function App() {
 								onChange={(event) => {
 									setPlayer1({id: 1, emoji: player1.emoji, name: event.target.value});
 								}}
-								class="player-name"
+								className="player-name"
 								data-tooltip-id="set-name-player1"
 								data-tooltip-content="Click to edit name"
 							/>
@@ -200,7 +205,7 @@ export default function App() {
 								onChange={(event) => {
 									setPlayer2({id: 2, emoji: player2.emoji, name: event.target.value});
 								}}
-								class="player-name"
+								className="player-name"
 								data-tooltip-id="set-name-player2"
 								data-tooltip-content="Click to edit name"
 							/>
