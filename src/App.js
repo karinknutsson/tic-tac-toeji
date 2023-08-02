@@ -198,7 +198,6 @@ export default function App() {
   		<>
 			<Modal content={modalContent} setModalContent={setModalContent}/>
 			<div className="main">
-				<h1>T I C - T A C - T O E J I</h1>
 				<div className="main-container">
 					<div className={"player-container " + (player1IsNext ? "active" : "")}>
 						<div className="player-title-container">
@@ -279,6 +278,7 @@ function calculateWinner(squares, player1, player2) {
 		[0, 4, 8],
 		[2, 4, 6]
 	];
+
 	for (let i = 0; i < lines.length; i++) {
 		const [a, b, c] = lines[i];
 
@@ -296,5 +296,7 @@ function calculateWinner(squares, player1, player2) {
 		  return player2;
 		}
 	}
+
+
   return null;
 }

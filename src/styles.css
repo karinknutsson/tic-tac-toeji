@@ -1,18 +1,22 @@
 @font-face {
-  font-family: 'Lilita One';
-  src: local('LilitaOne'), url(./fonts/LilitaOne.ttf) format('truetype');
+	font-family: 'Lilita One';
+	src: local('LilitaOne'), url(./fonts/LilitaOne.ttf) format('truetype');
 }
 
-html, body {
+html, body, #app {
 	overflow: hidden;
+	height: 100%;
 }
 
 body {
-  font-family: "Lilita One", sans-serif !important;
-  margin: 20px;
-  padding: 0;
-  background: black;
-  color: white;
+	font-family: "Lilita One", sans-serif !important;
+	margin: 20px;
+	padding: 0;
+	background: rgb(255, 172, 38);
+	background: linear-gradient(165deg, rgba(255, 172, 38, 1) 0%, rgba(255, 102, 208, 1) 100%);
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
 }
 
 h1, h2, h3 {
@@ -32,22 +36,8 @@ h3 {
   	font-size: 32px;
 }
 
-code {
-  font-size: 1.2em;
-}
-
-ul {
-  padding-left: 20px;
-}
-
 * {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 0;
+	box-sizing: border-box;
 }
 
 .modal, .main {
@@ -140,6 +130,7 @@ body {
 
 .player-name {
 	border: 0;
+	border-radius: 4px;
 	background: transparent;
 	color: white;
 	font-size: 24pt;
@@ -148,37 +139,46 @@ body {
 	width: 20vw;
 }
 
+.player-name:hover {
+	background: yellow;
+}
+
 .player-name:focus {
 	outline: none;
 	background: blue;
 }
 
 .active {
-	background: red;
+	background: rgba(255, 255, 255, 0.5);
 }
 
 .board {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	gap: 6px;
 }
 
 .board-row {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
+	gap: 6px;
 }
 
 .square {
 	aspect-ratio: 1 / 1;
-	flex: 2 1 30%;
-	background: #222;
-	border: 3px solid black;
+	flex: 0 0 120px;
+	/* background: rgba(255, 255, 255, 0.7); */
+	background: rgb(255,255,255);
+	background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 100%);
+	/* border: 0; */
 	border-radius: 4px;
-	font-size: 56pt;
-	line-height: 34px;
+	font-size: 80px;
+	/* line-height: 34px; */
 	padding: 0;
-	text-align: center;
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .board-row:after {
@@ -194,7 +194,7 @@ body {
 }
 
 .winner {
-	margin-top: 21px;
+	/* margin-top: 39px; */
 	animation: winning 1s infinite;
 	animation-timing-function: linear;
 }
@@ -202,17 +202,19 @@ body {
 @keyframes winning {
 	0% {
   		rotate: 0deg;
+		font-size: 80px;
 	}
 	/* 50% {
 		rotate: 180deg;
 	} */
 	100% {
 		rotate: 360deg;
+		font-size: 200px;
 	}
 }
 
 .loser {
-	margin-top: 21px;
+	/* margin-top: 39px; */
 	animation: losing 1s 1;
 }
 
@@ -224,3 +226,7 @@ body {
 		font-size: 0;
 	}
 }
+
+/* @media screen and (orientation: portrait) {
+
+} */
