@@ -47,7 +47,7 @@ export default function App() {
 
   return (
     <>
-      <Modal content={modalContent} setModalContent={setModalContent} />
+      <Modal content={modalContent} onCloseModal={() => setModalContent("")} />
       <div className="main">
         <div className="main-container">
           <Player
