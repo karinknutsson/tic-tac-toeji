@@ -1,3 +1,7 @@
+import { useState } from "react";
+import EmojiPicker from "emoji-picker-react";
+import { Tooltip } from "react-tooltip";
+
 export default function Player({
   playerIsNext,
   player,
@@ -8,7 +12,7 @@ export default function Player({
 
   return (
     <>
-      <div className="emojiPicker">
+      <div className={"emoji-picker " + (showPicker ? "" : "hidden")}>
         <EmojiPicker
           onEmojiClick={(e) => {
             onSetEmoji(player, e.emoji);
@@ -27,7 +31,7 @@ export default function Player({
               data-tooltip-content="Click to set emoji"
               onClick={() => setShowPicker(true)}
             >
-              {player1.emoji}
+              {player.emoji}
             </button>
           </h1>
           <Tooltip id="set-emoji-player" />

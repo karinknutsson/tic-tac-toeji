@@ -1,6 +1,5 @@
 import { useState } from "react";
-import EmojiPicker from "emoji-picker-react";
-import { Tooltip } from "react-tooltip";
+
 import Player from "./Player.js";
 
 function Square({ value, onSquareClick }) {
@@ -143,6 +142,7 @@ export default function App() {
             onSetEmoji={handleSetEmoji}
             onSetPlayerName={(e) => setPlayer1({ ...player1, name: e })}
           />
+
           <div className="board-container">
             <Board
               player1={player1}
@@ -151,15 +151,13 @@ export default function App() {
               setPlayer1IsNext={setPlayer1IsNext}
             />
           </div>
-          <div
-            className={"player-container " + (!player1IsNext ? "active" : "")}
-          >
-            <Player
-              playerIsNext={player2IsNext}
-              player={player2}
-              onSetPlayerName={(e) => setPlayer2({ ...player2, name: e })}
-            />
-          </div>
+
+          <Player
+            playerIsNext={!player1IsNext}
+            player={player2}
+            onSetEmoji={handleSetEmoji}
+            onSetPlayerName={(e) => setPlayer2({ ...player2, name: e })}
+          />
         </div>
       </div>
     </>

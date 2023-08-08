@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "Lilita One";
-  src: local("LilitaOne"), url(./fonts/LilitaOne.ttf) format("truetype");
+  src: local("LilitaOne"), url(./assets/fonts/LilitaOne.ttf) format("truetype");
 }
 
 html,
@@ -17,7 +17,7 @@ body {
   margin: 0;
   padding: 0;
   background: #772b69;
-  background-image: url("./public/background.png");
+  background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
@@ -48,6 +48,17 @@ h3 {
 
 .modal {
   position: absolute;
+}
+
+.emoji-picker {
+  position: absolute;
+  z-index: 19;
+  top: 30%;
+  bottom: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 .btn-emoji {
