@@ -106,24 +106,14 @@ export default function App() {
   const handleSetEmoji = (player, emoji) => {
     if (player.id === 1) {
       if (player2.emojis.findIndex((element) => element === emoji) === -1) {
-        setPlayer1({
-          id: 1,
-          emoji: emoji,
-          name: player.name,
-          emojis: [...player.emojis, emoji],
-        });
+        setPlayer1({ ...player, emojis: [...player.emojis, emoji] });
       } else {
         setModalContent("Pick an emoji that is not already in use");
       }
       setHidePicker1(!hidePicker1);
     } else {
       if (player1.emojis.findIndex((element) => element === emoji) === -1) {
-        setPlayer2({
-          id: 2,
-          emoji: emoji,
-          name: player.name,
-          emojis: [...player.emojis, emoji],
-        });
+        setPlayer2({ ...player, emojis: [...player.emojis, emoji] });
       } else {
         setModalContent("Pick an emoji that is not already in use");
       }
