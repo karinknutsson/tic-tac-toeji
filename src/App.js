@@ -310,6 +310,7 @@ export default function App() {
                 className="player-name"
                 data-tooltip-id="set-name-player1"
                 data-tooltip-content="Click to edit name, press enter to save"
+                maxlength="8"
               />
               <Tooltip id="set-name-player1" />
             </div>
@@ -356,6 +357,7 @@ export default function App() {
                 className="player-name"
                 data-tooltip-id="set-name-player2"
                 data-tooltip-content="Click to edit name, press enter to save"
+                maxlength="8"
               />
               <Tooltip id="set-name-player2" />
             </div>
