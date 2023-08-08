@@ -44,110 +44,109 @@ function Board({
       <>
         {/*
 				<div className="winner-container">{winner.emojis.map(emoji => (<div className="winner">{emoji}</div>))}</div>*/}
-        <div className="board">
-          <div className="board-row">
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[0])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[0]}
-              </div>
-            </div>
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[1])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[1]}
-              </div>
-            </div>
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[2])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[2]}
-              </div>
+
+        <div className="board-row">
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[0])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[0]}
             </div>
           </div>
-          <div className="board-row">
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[3])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[3]}
-              </div>
-            </div>
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[4])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[4]}
-              </div>
-            </div>
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[5])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[5]}
-              </div>
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[1])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[1]}
             </div>
           </div>
-          <div className="board-row">
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[6])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[6]}
-              </div>
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[2])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[2]}
             </div>
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[7])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[7]}
-              </div>
+          </div>
+        </div>
+        <div className="board-row">
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[3])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[3]}
             </div>
-            <div className="square">
-              <div
-                className={
-                  winner.emojis.some((element) => element === squares[8])
-                    ? "winner"
-                    : "loser"
-                }
-              >
-                {squares[8]}
-              </div>
+          </div>
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[4])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[4]}
+            </div>
+          </div>
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[5])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[5]}
+            </div>
+          </div>
+        </div>
+        <div className="board-row">
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[6])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[6]}
+            </div>
+          </div>
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[7])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[7]}
+            </div>
+          </div>
+          <div className="square">
+            <div
+              className={
+                winner.emojis.some((element) => element === squares[8])
+                  ? "winner"
+                  : "loser"
+              }
+            >
+              {squares[8]}
             </div>
           </div>
         </div>
@@ -162,22 +161,20 @@ function Board({
 
   return (
     <>
-      <div className="board">
-        <div className="board-row">
-          <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-          <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-          <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-        </div>
-        <div className="board-row">
-          <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-          <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-          <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-        </div>
-        <div className="board-row">
-          <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-          <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-          <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-        </div>
+      <div className="board-row">
+        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+      </div>
+      <div className="board-row">
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+      </div>
+      <div className="board-row">
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
     </>
   );
