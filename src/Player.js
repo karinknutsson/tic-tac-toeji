@@ -42,7 +42,7 @@ export default function Player({
             className="player-name"
             data-tooltip-id="set-name-player"
             data-tooltip-content="Click to edit name, press enter to save"
-            maxlength="8"
+            maxLength="8"
           />
           <Tooltip id="set-name-player" />
         </div>
