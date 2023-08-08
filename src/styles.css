@@ -165,12 +165,6 @@ h3 {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* .board-row:after {
-  clear: both;
-  content: "";
-  display: table;
-} */
-
 .player-title-container {
   display: flex;
   flex-direction: column;
@@ -201,23 +195,6 @@ h3 {
 
 .active {
   background: rgba(242, 176, 130, 0.5);
-}
-
-/* .winner-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.winner {
-  animation: winning 1s infinite;
-  animation-timing-function: linear;
-} */
-
-#board-container.player1wins {
-  transform: translateX(500px);
-  transition-property: transform;
-  transition-duration: 3s;
 }
 
 /* @media screen and (orientation: portrait) {
