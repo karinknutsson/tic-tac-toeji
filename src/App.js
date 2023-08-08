@@ -104,7 +104,7 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
-  const setEmoji = (player, emoji) => {
+  const handleSetEmoji = (player, emoji) => {
     if (player.id === 1) {
       if (player2.emojis.findIndex((element) => element === emoji) === -1) {
         setPlayer1({
@@ -140,6 +140,7 @@ export default function App() {
           <Player
             playerIsNext={player1IsNext}
             player={player1}
+            onSetEmoji={handleSetEmoji}
             onSetPlayerName={(e) => setPlayer1({ ...player1, name: e })}
           />
           <div className="board-container">

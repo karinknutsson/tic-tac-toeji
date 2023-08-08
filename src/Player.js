@@ -1,11 +1,19 @@
-export default function Player({ playerIsNext, player, onSetPlayerName }) {
+export default function Player({
+  playerIsNext,
+  player,
+  onSetEmoji,
+  onSetPlayerName,
+}) {
   const [showPicker, setShowPicker] = useState(false);
 
   return (
     <>
       <div className="emojiPicker">
         <EmojiPicker
-          onEmojiClick={(e) => setEmoji(player, e.emoji)}
+          onEmojiClick={(e) => {
+            onSetEmoji(player, e.emoji);
+            setShowPicker(false);
+          }}
           theme="dark"
           preload
         />
@@ -17,7 +25,7 @@ export default function Player({ playerIsNext, player, onSetPlayerName }) {
               className="btn-emoji"
               data-tooltip-id="set-emoji-player"
               data-tooltip-content="Click to set emoji"
-              //   onClick={() => showPicker(player)}
+              onClick={() => setShowPicker(true)}
             >
               {player1.emoji}
             </button>
@@ -37,29 +45,4 @@ export default function Player({ playerIsNext, player, onSetPlayerName }) {
       </div>
     </>
   );
-}
-
-function PlayerPicker({ showPicker, setEmoji, player }) {
-  //   if (hidePicker) {
-  //     return null;
-  //   }
-
-  function handleOnEmoji(e) {
-    setEmoji(e.emoji);
-  }
-
-  return (
-    showPicker && (
-      <>
-        <div></div>
-      </>
-    )
-  );
-}
-{
-  /* <PlayerPicker
-              hidePicker={hidePicker2}
-              setEmoji={setEmoji}
-              player={player2}
-            /> */
 }
