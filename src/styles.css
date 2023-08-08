@@ -114,7 +114,7 @@ h3 {
   justify-content: center;
 }
 
-.main-container {
+.game-container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -136,11 +136,9 @@ h3 {
   justify-content: center;
 }
 
-#board-container {
+.board-container {
   display: flex;
   flex: 0 0 25%;
-  /* width: calc(100% - 32px);
-  height: calc(100% - 32px); */
   aspect-ratio: 1 / 1 !important;
   gap: 4%;
   flex-direction: column;
@@ -197,6 +195,23 @@ h3 {
   background: rgba(242, 176, 130, 0.5);
 }
 
-/* @media screen and (orientation: portrait) {
+@media screen and (orientation: portrait) {
+  .game-container {
+    flex-direction: column;
+  }
 
-} */
+  .player-container {
+    width: 50vw;
+    height: 50vw;
+  }
+
+  .btn-emoji {
+    width: 12vw;
+    height: 12vw;
+    font-size: 10vw;
+  }
+
+  .player-name {
+    font-size: 5vw;
+  }
+}

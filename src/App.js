@@ -49,7 +49,7 @@ export default function App() {
     <>
       <Modal content={modalContent} onCloseModal={() => setModalContent("")} />
       <div className="main">
-        <div className="main-container">
+        <div className="game-container">
           <Player
             playerIsNext={player1IsNext}
             player={player1}
