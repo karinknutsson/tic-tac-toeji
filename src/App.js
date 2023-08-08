@@ -1,6 +1,7 @@
 import { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import { Tooltip } from "react-tooltip";
+import Player from "./Player.js";
 
 function Square({ value, onSquareClick }) {
   return (
@@ -39,121 +40,6 @@ function Board({
 
   const winner = calculateWinner(squares, player1, player2);
 
-  if (winner) {
-    return (
-      <>
-        {/*
-				<div className="winner-container">{winner.emojis.map(emoji => (<div className="winner">{emoji}</div>))}</div>*/}
-
-        <div className="board-row">
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[0])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[0]}
-            </div>
-          </div>
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[1])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[1]}
-            </div>
-          </div>
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[2])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[2]}
-            </div>
-          </div>
-        </div>
-        <div className="board-row">
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[3])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[3]}
-            </div>
-          </div>
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[4])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[4]}
-            </div>
-          </div>
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[5])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[5]}
-            </div>
-          </div>
-        </div>
-        <div className="board-row">
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[6])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[6]}
-            </div>
-          </div>
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[7])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[7]}
-            </div>
-          </div>
-          <div className="square">
-            <div
-              className={
-                winner.emojis.some((element) => element === squares[8])
-                  ? "winner"
-                  : "loser"
-              }
-            >
-              {squares[8]}
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
   if (isGameOver() && !winner) {
     setSquares(Array(9).fill(null));
     return;
@@ -175,28 +61,6 @@ function Board({
         <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
-    </>
-  );
-}
-
-function PlayerPicker({ hidePicker, setEmoji, player }) {
-  if (hidePicker) {
-    return null;
-  }
-
-  function handleOnEmoji(e) {
-    setEmoji(e.emoji);
-  }
-
-  return (
-    <>
-      <div>
-        <EmojiPicker
-          onEmojiClick={(e) => setEmoji(player, e.emoji)}
-          theme="dark"
-          preload
-        />
       </div>
     </>
   );
@@ -240,14 +104,6 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
 
-  function showPicker(player) {
-    if (player.id === player1.id) {
-      setHidePicker1(!hidePicker1);
-    } else {
-      setHidePicker2(!hidePicker2);
-    }
-  }
-
   const setEmoji = (player, emoji) => {
     if (player.id === 1) {
       if (player2.emojis.findIndex((element) => element === emoji) === -1) {
@@ -281,45 +137,11 @@ export default function App() {
       <Modal content={modalContent} setModalContent={setModalContent} />
       <div className="main">
         <div className="main-container">
-          <div
-            className={"player-container " + (player1IsNext ? "active" : "")}
-          >
-            <div className="player-title-container">
-              <h1>
-                <button
-                  className="btn-emoji"
-                  data-tooltip-id="set-emoji-player1"
-                  data-tooltip-content="Click to set emoji"
-                  onClick={() => showPicker(player1)}
-                >
-                  {player1.emoji}
-                </button>
-              </h1>
-              <Tooltip id="set-emoji-player1" />
-              <input
-                type="text"
-                value={player1.name}
-                onChange={(event) => {
-                  setPlayer1({
-                    id: 1,
-                    emoji: player1.emoji,
-                    name: event.target.value,
-                    emojis: player1.emojis,
-                  });
-                }}
-                className="player-name"
-                data-tooltip-id="set-name-player1"
-                data-tooltip-content="Click to edit name, press enter to save"
-                maxlength="8"
-              />
-              <Tooltip id="set-name-player1" />
-            </div>
-            <PlayerPicker
-              hidePicker={hidePicker1}
-              setEmoji={setEmoji}
-              player={player1}
-            />
-          </div>
+          <Player
+            playerIsNext={player1IsNext}
+            player={player1}
+            onSetPlayerName={(e) => setPlayer1({ ...player1, name: e })}
+          />
           <div className="board-container">
             <Board
               player1={player1}
@@ -331,40 +153,10 @@ export default function App() {
           <div
             className={"player-container " + (!player1IsNext ? "active" : "")}
           >
-            <div className="player-title-container">
-              <h1>
-                <button
-                  className="btn-emoji"
-                  data-tooltip-id="set-emoji-player1"
-                  data-tooltip-content="Click to set emoji"
-                  onClick={() => showPicker(player2)}
-                >
-                  {player2.emoji}
-                </button>
-              </h1>
-              <Tooltip id="set-emoji-player2" />
-              <input
-                type="text"
-                value={player2.name}
-                onChange={(event) => {
-                  setPlayer2({
-                    id: 2,
-                    emoji: player2.emoji,
-                    name: event.target.value,
-                    emojis: player2.emojis,
-                  });
-                }}
-                className="player-name"
-                data-tooltip-id="set-name-player2"
-                data-tooltip-content="Click to edit name, press enter to save"
-                maxlength="8"
-              />
-              <Tooltip id="set-name-player2" />
-            </div>
-            <PlayerPicker
-              hidePicker={hidePicker2}
-              setEmoji={setEmoji}
+            <Player
+              playerIsNext={player2IsNext}
               player={player2}
+              onSetPlayerName={(e) => setPlayer2({ ...player2, name: e })}
             />
           </div>
         </div>
