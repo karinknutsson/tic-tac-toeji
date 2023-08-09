@@ -1,9 +1,11 @@
 import { useState } from "react";
+import Animation from "./Animation.js";
 import Player from "./Player.js";
 import Board from "./Board.js";
 import Modal from "./Modal.js";
 
 const emojiInUseMessage = "Pick an emoji that is not in use";
+const nobodyWinsMessage = "Nobody wins";
 
 export default function App() {
   const [player1, setPlayer1] = useState({
@@ -19,6 +21,7 @@ export default function App() {
     emojis: ["🐰"],
   });
   const [player1IsNext, setPlayer1IsNext] = useState(true);
+  const [winner, setWinner] = useState(undefined);
   const [modalContent, setModalContent] = useState("");
 
   const handleSetEmoji = (player, emoji) => {
@@ -47,6 +50,7 @@ export default function App() {
 
   return (
     <>
+      <Animation winner={winner} />
       <Modal content={modalContent} onCloseModal={() => setModalContent("")} />
       <div className="main">
         <div className="game-container">
@@ -62,6 +66,8 @@ export default function App() {
             player2={player2}
             player1IsNext={player1IsNext}
             setPlayer1IsNext={setPlayer1IsNext}
+            noWinner={() => setModalContent(nobodyWinsMessage)}
+            gameWon={(winner) => setWinner(winner)}
           />
 
           <Player

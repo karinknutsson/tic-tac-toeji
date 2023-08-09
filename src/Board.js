@@ -5,6 +5,7 @@ export default function Board({
   player2,
   player1IsNext,
   setPlayer1IsNext,
+  noWinner,
 }) {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
@@ -29,11 +30,12 @@ export default function Board({
   const winner = calculateWinner(squares, player1, player2);
 
   if (isGameOver() && !winner) {
-    return <h2>Nobody wins!</h2>;
+    noWinner();
+    setSquares(Array(9).fill(null));
   }
 
   if (winner) {
-    return <h2>{winner.name} wins!</h2>;
+    gameWon(winner);
   }
 
   return (

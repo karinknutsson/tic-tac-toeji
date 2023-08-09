@@ -195,6 +195,12 @@ h3 {
   background: rgba(242, 176, 130, 0.5);
 }
 
+.winner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
 @media screen and (orientation: portrait) {
   .game-container {
     flex-direction: column;
