@@ -5,37 +5,38 @@ export default function Board({
   player2,
   player1IsNext,
   setPlayer1IsNext,
-  noWinner,
+  setWinner,
 }) {
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i) {
-    if (squares[i] || calculateWinner(squares, player1, player2)) {
+    if (squares[i]) {
       return;
     }
+
     const nextSquares = squares.slice();
+
     if (player1IsNext) {
       nextSquares[i] = player1.emoji;
     } else {
       nextSquares[i] = player2.emoji;
     }
-    setSquares(nextSquares);
+
+    let roundWinner;
+
+    setSquares((_) => {
+      roundWinner = calculateWinner(nextSquares, player1, player2);
+
+      if (roundWinner) setWinner((_) => roundWinner);
+
+      return nextSquares;
+    });
+
     setPlayer1IsNext(!player1IsNext);
   }
 
   function isGameOver() {
     return !squares.some((element) => element === null);
-  }
-
-  const winner = calculateWinner(squares, player1, player2);
-
-  if (isGameOver() && !winner) {
-    noWinner();
-    setSquares(Array(9).fill(null));
-  }
-
-  if (winner) {
-    gameWon(winner);
   }
 
   return (
